@@ -21,4 +21,10 @@ public class Button_Controller : MonoBehaviour
     {
         SceneManager.LoadScene("MainScene");
     }
+
+
+    public void Reset()
+    {
+        PlayerPrefs.SetInt("HighScore",0);
+    }
 }

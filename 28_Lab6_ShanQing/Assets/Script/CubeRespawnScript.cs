@@ -16,25 +16,11 @@ public class CubeRespawnScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // for mobile devices
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit))
-            {
-                SpawnCubes();
-                UIScore.ScoreIncrement();
-                Destroy(hit.collider.gameObject);
-            }
-        }
-
-        //// for PC 
-        //if (Input.GetMouseButtonDown(0))
+        //// for mobile devices
+        //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         //{
-        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
         //    RaycastHit hit;
-
         //    if (Physics.Raycast(ray, out hit))
         //    {
         //        SpawnCubes();
@@ -42,6 +28,20 @@ public class CubeRespawnScript : MonoBehaviour
         //        Destroy(hit.collider.gameObject);
         //    }
         //}
+
+        // for PC 
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                SpawnCubes();
+                UIScore.ScoreIncrement();
+                Destroy(hit.collider.gameObject);
+            }
+        }
     }
 
     void SpawnCubes()
