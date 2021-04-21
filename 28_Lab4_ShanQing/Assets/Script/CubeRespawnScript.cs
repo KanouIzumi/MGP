@@ -29,24 +29,24 @@ public class CubeRespawnScript : MonoBehaviour
             }
         }
 
-        // for PC 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
+        //// for PC 
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //    RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
-            {
-                SpawnCubes();
-                UIScore.ScoreIncrement();
-                Destroy(hit.collider.gameObject);
-            }
-        }
+        //    if (Physics.Raycast(ray, out hit))
+        //    {
+        //        SpawnCubes();
+        //        UIScore.ScoreIncrement();
+        //        Destroy(hit.collider.gameObject);
+        //    }
+        //}
     }
 
     void SpawnCubes()
     {
-        Vector3 position = new Vector3(Random.Range(-8f, 8f), Random.Range(-4f, 4f));
+        Vector3 position = new Vector3(Random.Range(-5f, 5f), Random.Range(-4f, 4f));
         Instantiate(gameObject, position, Quaternion.identity);
     }
 }
