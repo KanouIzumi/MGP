@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class UIScript : MonoBehaviour
 {
@@ -18,7 +19,10 @@ public class UIScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(score >=5)
+        {
+            SceneManager.LoadScene("WinScene");
+        }
     }
 
     public void ScoreIncrement()
