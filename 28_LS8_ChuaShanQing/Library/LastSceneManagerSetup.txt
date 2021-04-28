@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/28_ChuaShanQing_LS8.unity
+- path: Assets/Scenes/GameWinScene.unity
   isLoaded: 1
   isActive: 1
