@@ -55,20 +55,18 @@ public class GameManager : MonoBehaviour
         }
 
         //Creating User Input com
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             //checking the state of the animation 
             if (animator.GetCurrentAnimatorStateInfo(0).IsName("Yellow_Animation"))
             {
                 score++;
                 scoreText.text = "Score: " + score;
-                Debug.Log("You got yellow");
             }
 
-            else
+            else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Green_Animation") || animator.GetCurrentAnimatorStateInfo(0).IsName("Blue_Animation"))
             {
-                Debug.Log("Wrong");
-                lives -=1;
+                lives -= 1;
                 livesText.text = "Lives: " + lives;
             }
         }
@@ -77,32 +75,55 @@ public class GameManager : MonoBehaviour
 
         ////creating User Input for Phone
         //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        //{
-        //    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-        //    RaycastHit hit;
-        //    if (Physics.Raycast(ray, out hit))
         //    {
-        //        //checking the state of the animation 
-        //        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Yellow_Animation"))
+        //        Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+        //        RaycastHit hit;
+        //        if (Physics.Raycast(ray, out hit))
         //        {
-        //            score++;
-        //            scoreText.text = "Score: " + score;
-        //            Debug.Log("You got yellow");
+        //                   //checking the state of the animation 
+        //                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Yellow_Animation"))
+        //                 {
+        //                     score++;
+        //                     scoreText.text = "Score: " + score;
+        //                  }
         //        }
-        //    }
 
-        //    else
-        //    {
-        //        Debug.Log("Wrong");
-        //        lives -= 1;
-        //        livesText.text = "Lives: " + lives;
-        //    }
+        //        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Green_Animation") || animator.GetCurrentAnimatorStateInfo(0).IsName("Blue_Animation"))
+        //        {
+        //          lives -= 1;
+        //          livesText.text = "Lives: " + lives;
+        //        }
         //}
 
-        if (levelTime < 0)
+
+        //When time reach 0
+        if (levelTimePassed <= 0)
         {
             timeText.text = "Time: 0";
-            SceneManager.LoadScene("");
+            PlayerPrefs.SetInt("score", score);
+
+            int highscore = PlayerPrefs.GetInt("Highscore",0);
+            //Check if we got new high score
+            if(score > highscore)
+            {
+                PlayerPrefs.SetInt("Highscore", score);
+            }
+
+
+            SceneManager.LoadScene("GameWinScene");
         }
+
+
+        if (lives <=0)
+        {
+            livesText.text = "Lives: 0";
+            SceneManager.LoadScene("GameLooseScene");
+        }
+
+    }
+
+    public void Reset()
+    {
+        PlayerPrefs.DeleteAll();
     }
 }
