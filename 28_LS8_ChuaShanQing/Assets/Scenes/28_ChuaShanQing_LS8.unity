@@ -275,6 +275,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 277565659}
   startDelayTime: 2
+  levelTime: 10
+  scoreText: {fileID: 1956044466}
+  livesText: {fileID: 2038276419}
+  timeText: {fileID: 1851375696}
+  lives: 3
+  score: 0
 --- !u!1 &222797603
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,7 +824,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 16, y: 141}
-  m_SizeDelta: {x: 200, y: 60}
+  m_SizeDelta: {x: 300, y: 60}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1851375696
 MonoBehaviour:
