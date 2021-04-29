@@ -57,42 +57,49 @@ public class GameManager : MonoBehaviour
         //Creating User Input com
         if (Input.GetMouseButtonDown(0))
         {
-            //checking the state of the animation 
-            if (animator.GetCurrentAnimatorStateInfo(0).IsName("Yellow_Animation"))
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit))
             {
-                score++;
-                scoreText.text = "Score: " + score;
-            }
+                //checking the state of the animation 
+                if (animator.GetCurrentAnimatorStateInfo(0).IsName("Yellow_Animation"))
+                {
+                    score++;
+                    scoreText.text = "Score: " + score;
+                }
 
-            else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Green_Animation") || animator.GetCurrentAnimatorStateInfo(0).IsName("Blue_Animation"))
-            {
-                lives -= 1;
-                livesText.text = "Lives: " + lives;
+                else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Green_Animation") || animator.GetCurrentAnimatorStateInfo(0).IsName("Blue_Animation"))
+                {
+                    lives -= 1;
+                    livesText.text = "Lives: " + lives;
+                }
             }
+                
+           
         }
 
 
 
         ////creating User Input for Phone
         //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        //{
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+        //    RaycastHit hit;
+        //    if (Physics.Raycast(ray, out hit))
         //    {
-        //        Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-        //        RaycastHit hit;
-        //        if (Physics.Raycast(ray, out hit))
+        //        //checking the state of the animation 
+        //        if (animator.GetCurrentAnimatorStateInfo(0).IsName("Yellow_Animation"))
         //        {
-        //                   //checking the state of the animation 
-        //                 if (animator.GetCurrentAnimatorStateInfo(0).IsName("Yellow_Animation"))
-        //                 {
-        //                     score++;
-        //                     scoreText.text = "Score: " + score;
-        //                  }
+        //            score++;
+        //            scoreText.text = "Score: " + score;
         //        }
+        //    }
 
-        //        else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Green_Animation") || animator.GetCurrentAnimatorStateInfo(0).IsName("Blue_Animation"))
-        //        {
-        //          lives -= 1;
-        //          livesText.text = "Lives: " + lives;
-        //        }
+        //    else if (animator.GetCurrentAnimatorStateInfo(0).IsName("Green_Animation") || animator.GetCurrentAnimatorStateInfo(0).IsName("Blue_Animation"))
+        //    {
+        //        lives -= 1;
+        //        livesText.text = "Lives: " + lives;
+        //    }
         //}
 
 

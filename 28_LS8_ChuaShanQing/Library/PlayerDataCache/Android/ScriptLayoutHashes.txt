@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-D:/Github/MGP/28_LS8_ChuaShanQing/Build/28_LS8_ChuaShanQing.apk
+C:/Users/student/Downloads/ChuaShanQing/MGP/28_LS8_ChuaShanQing/Build/28_LS8_ChuaShanQing.apk
 SceneListBegin?
 Assets/Scenes/28_ChuaShanQing_LS8.unity
 Assets/Scenes/GameLooseScene.unity
