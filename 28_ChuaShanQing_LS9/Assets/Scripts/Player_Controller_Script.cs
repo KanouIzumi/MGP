@@ -49,6 +49,12 @@ public class Player_Controller_Script : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpPower);
         }
+
+
+        if(transform.position.y < -6 || Input.GetKey(KeyCode.R))
+        {
+            SceneManager.LoadScene("GameScene");
+        }
     }
 
 
