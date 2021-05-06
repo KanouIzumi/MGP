@@ -56,11 +56,11 @@ public class Player_Controller_Script : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Water"))
-        {
-            SceneManager.LoadScene("GameScene");
-        }
 
+        if (collision.gameObject.CompareTag("Goal"))
+        {
+            SceneManager.LoadScene("WinScene");
+        }
 
 
     }
