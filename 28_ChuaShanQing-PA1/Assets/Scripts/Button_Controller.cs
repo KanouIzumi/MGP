@@ -26,4 +26,14 @@ public class Button_Controller : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void Instruction()
+    {
+        SceneManager.LoadScene("InstructionScene");
+    }
+
+    public void StartScene()
+    {
+        SceneManager.LoadScene("StartScene");
+    }
 }

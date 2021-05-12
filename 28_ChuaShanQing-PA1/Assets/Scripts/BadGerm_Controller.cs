@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class BadGerm_Controller : MonoBehaviour
 {
+    public GameManger instance;
+    private AudioSource audioSource;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +27,7 @@ public class BadGerm_Controller : MonoBehaviour
             {
                 GameManger.instance.score++;
                 GameManger.instance.scoreText.text = "Scores: " + GameManger.instance.score;
+                GameManger.instance.SpawnBadGerms();
                 Destroy(hit.collider.gameObject);
             }
         }
@@ -35,10 +39,11 @@ public class BadGerm_Controller : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Bad_Germ")
             {
                 GameManger.instance.score++;
                 GameManger.instance.scoreText.text = "Scores: " + GameManger.instance.score;
+                GameManger.instance.SpawnBadGerms();
                 Destroy(hit.collider.gameObject);
             }
         }

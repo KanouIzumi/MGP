@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class GoodGerm_Controller : MonoBehaviour
 {
-    
+    private AudioSource audioSource;
+
+    public GameManger instance;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +27,7 @@ public class GoodGerm_Controller : MonoBehaviour
             {
                 GameManger.instance.lives--;
                 GameManger.instance.livesText.text = "Lives: " + GameManger.instance.lives;
+                GameManger.instance.SpawnGoodGerms();
                 Destroy(hit.collider.gameObject);
             }
         }
@@ -36,11 +39,13 @@ public class GoodGerm_Controller : MonoBehaviour
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if (Physics.Raycast(ray, out hit))
+            if (Physics.Raycast(ray, out hit ) && hit.transform.tag == "Good_Germ")
             {
                 GameManger.instance.lives--;
                 GameManger.instance.livesText.text = "Lives: " + GameManger.instance.lives;
+                GameManger.instance.SpawnGoodGerms();
                 Destroy(hit.collider.gameObject);
+
             }
         }
     }

@@ -36,6 +36,7 @@ public class GameManger : MonoBehaviour
         }
 
 
+
         //This code is for when this game is imported into other phone it will resize the game into that phone size
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
 
@@ -55,34 +56,37 @@ public class GameManger : MonoBehaviour
         //When the time start it will spawn the good and bad germs
         if(elapsedTime > 0)
         {
-            //SpawnBadGerms();
-            //SpawnGoodGerms();
         
             levelTimePassed -= Time.deltaTime;
             timeText.text = "Time: " + levelTimePassed.ToString("0.00");
-
-            if(levelTimePassed < 0)
-            {
-                SceneManager.LoadScene("WinScene");
-            }
         }
 
+        //this is for the win condition
+        if (levelTimePassed < 0 || score > 10)
+        {
+            SceneManager.LoadScene("WinScene");
+        }
 
+        //this is for the lose condition
+        if(lives ==0)
+        {
+            SceneManager.LoadScene("LoseScene");
+        }
 
 
     }
 
     //Spawning the bad germs
-    void SpawnBadGerms()
+    public void SpawnBadGerms()
     {
         Vector3 position = new Vector3(Random.Range(-screenBounds.x, screenBounds.x), Random.Range(-screenBounds.y, screenBounds.y), 0);
-        Instantiate(badGerm, position, Quaternion.identity);
+        var NewBadgerms = Instantiate(badGerm, position, Quaternion.identity);
     }
 
     //spawning the good germs
-    void SpawnGoodGerms()
+    public void SpawnGoodGerms()
     {
         Vector3 position = new Vector3(Random.Range(-screenBounds.x, screenBounds.x), Random.Range(-screenBounds.y, screenBounds.y), 0);
-        Instantiate(goodGerm, position, Quaternion.identity);
+        var NewGoodGerms = Instantiate(goodGerm, position, Quaternion.identity);
     }
 }
