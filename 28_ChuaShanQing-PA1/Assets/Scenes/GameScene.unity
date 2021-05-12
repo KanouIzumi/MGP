@@ -761,7 +761,6 @@ MonoBehaviour:
     type: 3}
   AudioClipBGMArr:
   - {fileID: 8300000, guid: ce1c9b53d5b1aba4aa897a5f80dd77e8, type: 3}
-  - {fileID: 8300000, guid: c78024af6ae8ca649bb2c21b69992acc, type: 3}
 --- !u!4 &925768749
 Transform:
   m_ObjectHideFlags: 0
