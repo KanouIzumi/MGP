@@ -26,6 +26,9 @@ public class GameManger : MonoBehaviour
     private float levelTimePassed;
 
 
+    private AudioSource audioSource;
+    public AudioClip[] AudioClipBGMArr;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,7 +38,7 @@ public class GameManger : MonoBehaviour
             instance = this;
         }
 
-
+        audioSource = GetComponent<AudioSource>();
 
         //This code is for when this game is imported into other phone it will resize the game into that phone size
         screenBounds = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, Screen.height, Camera.main.transform.position.z));
@@ -73,6 +76,76 @@ public class GameManger : MonoBehaviour
             SceneManager.LoadScene("LoseScene");
         }
 
+        //this is for the Bad germs
+        //// for mobile devices
+        //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        //{
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+        //    RaycastHit hit;
+
+        //    if (Physics.Raycast(ray, out hit))
+        //    {
+        //        GameManger.instance.score++;
+        //        GameManger.instance.scoreText.text = "Scores: " + GameManger.instance.score;
+        //        GameManger.instance.SpawnBadGerms();
+        //        Destroy(hit.collider.gameObject);
+        //    }
+        //}
+
+
+        // for PC 
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Bad_Germ")
+            {
+                audioSource.PlayOneShot(AudioClipBGMArr[0]);
+                GameManger.instance.score++;
+                GameManger.instance.scoreText.text = "Scores: " + GameManger.instance.score;
+                GameManger.instance.SpawnBadGerms();
+                GameManger.instance.SpawnGoodGerms();
+                GermsReset();
+            }
+        }
+
+
+        //this is for the good germs 
+        //// for mobile devices
+        //if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        //{
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+        //    RaycastHit hit;
+        //    if (Physics.Raycast(ray, out hit))
+        //    {
+        //        GameManger.instance.lives--;
+        //        GameManger.instance.livesText.text = "Lives: " + GameManger.instance.lives;
+        //        GameManger.instance.SpawnGoodGerms();
+        //        Destroy(hit.collider.gameObject);
+        //    }
+        //}
+
+
+        // for PC 
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit) && hit.transform.tag == "Good_Germ")
+            {
+                audioSource.PlayOneShot(AudioClipBGMArr[0]);
+                GameManger.instance.lives--;
+                GameManger.instance.livesText.text = "Lives: " + GameManger.instance.lives;
+                GameManger.instance.SpawnGoodGerms();
+                GameManger.instance.SpawnBadGerms();
+                GermsReset();
+
+            }
+        }
+
+
 
     }
 
@@ -88,5 +161,15 @@ public class GameManger : MonoBehaviour
     {
         Vector3 position = new Vector3(Random.Range(-screenBounds.x, screenBounds.x), Random.Range(-screenBounds.y, screenBounds.y), 0);
         var NewGoodGerms = Instantiate(goodGerm, position, Quaternion.identity);
+    }
+
+
+    void GermsReset() //Deleting the cube and sphere
+    {
+        var goodGerm = GameObject.FindGameObjectWithTag("Good_Germ");
+        var badGerm = GameObject.FindGameObjectWithTag("Bad_Germ");
+
+        Destroy(goodGerm);
+        Destroy(badGerm);
     }
 }
